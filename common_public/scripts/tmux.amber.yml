@@ -1,0 +1,71 @@
+# ~/.tmuxinator/amber.yml
+# mux new amber
+# mux start amber
+
+name: amber
+root: ~/
+
+windows:
+  - frontend:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.frontend
+  			- rails s
+  		- console
+  			- cd base_path/amber.frontend
+  - product:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.product
+  			- rails s -p 3005
+  		- console
+  			- cd base_path/amber.product
+  - clients:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.clients
+  			- rails s -p 3001
+  		- console
+  			- cd base_path/amber.clients
+  - notify:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.notify
+  			- rails s -p 3002
+  		- console
+  			- cd base_path/amber.notify
+  		- worker
+  			- cd base_path/amber.notify
+  			- bundle exec rake environment resque:work QUEUE=*
+  - images:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.images
+  			- rails s -p 3006
+  		- console
+  			- cd base_path/amber.images
+  		- worker
+  			- cd base_path/amber.images
+  			- bundle exec rake environment resque:work QUEUE=*
+  - dashboard:
+  	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.dashboard
+  			- gulp
+  		- console
+  			- cd base_path/amber.dashboard
+  - payments:
+    	layout: main-vertical
+  	panes:
+  		-server
+  			- cd base_path/amber.payments
+  			- rails s -p 3007
+  		- console
+  			- cd base_path/amber.payments
+
