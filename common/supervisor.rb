@@ -1,7 +1,11 @@
-# Installing supervisor
-execute 'yum install python-setuptools -y'
-execute 'yum install python-setuptools-devel -y'
-execute 'easy_install supervisor'
+namespace :supervisor do
+  task :install do
+    comment %{Installing Supervisor}
+    execute %{yum install python-setuptools -y}
+    execute %{yum install python-setuptools-devel -y}
+    execute %{easy_install supervisor}
+  end
+end
 
 # Adding the config files
 # We are using the config in app

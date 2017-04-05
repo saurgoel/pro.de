@@ -1,5 +1,9 @@
 set :rbenv_path, "$HOME/.rbenv"
 
+task :'rbenv:install' do
+
+end
+
 task :'rbenv:load' do
   comment %{Loading rbenv}
   command %{export RBENV_ROOT="#{fetch(:rbenv_path)}"}

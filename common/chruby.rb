@@ -17,3 +17,22 @@ task :chruby, :env do |_, args|
   command %{source #{fetch(:chruby_path)}}
   command %{chruby "#{args[:env]}" || exit 1}
 end
+
+
+bash "installing chruby from source" do
+  user "root"
+  code <<-EOH
+    wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+    tar -xzvf chruby-0.3.9.tar.gz
+    cd chruby-0.3.9/
+    sudo make install
+    ./scripts/setup.sh
+    cd ..
+    rm -rf chruby-0.3.9.tar.gz chruby-0.3.9
+  EOH
+end
+
+
+<!-- Execute this finally -->
+chruby 2.1.1
+

@@ -1,5 +1,9 @@
 set :rvm_use_path, '$HOME/.rvm/scripts/rvm'
 
+task :'rvm:install' do
+
+end
+
 task :'rvm:use', :env do |_, args|
   unless args[:env]
     puts "Task 'rvm:use' needs an RVM environment name as an argument."
