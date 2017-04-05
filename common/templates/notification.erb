@@ -1,0 +1,29 @@
+medium=$1
+category=$2
+message=$3
+case "$medium" in
+  "slack") 
+    case "$category" in
+      "deploy")
+        channel="#tech-deployments"
+        curl -X POST --data-urlencode 'payload={"channel": "'"$channel"'",  "text": "'"$message"'"}' https://hooks.slack.com/services/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
+        echo "----> Pushed to slack"
+      ;;
+      "alert")
+        channel="#tech"
+        curl -X POST --data-urlencode 'payload={"channel": "'"$channel"'",  "text": "'"$message"'"}' https://hooks.slack.com/services/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
+        echo "----> Pushed to slack"
+      ;;
+      *)
+        echo "----> No category specified"
+      ;;
+    esac
+
+  ;;
+  "email")
+    echo "----> Pushed to email"
+  ;;
+  *)
+    echo "Not a valid medium"
+  ;;
+esac
